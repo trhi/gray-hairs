@@ -1,0 +1,14 @@
+{
+	"path": "assets/audio/",
+	"slivers": [
+    {"filename": "sliver01.mp3", "text": "I look around me and I see only the women, dyeing"},
+    {"filename": "sliver01.mp3", "text": "Why only the women?"},
+    {"filename": "sliver01.mp3", "text": "It's like a change of state"},
+    {"filename": "sliver01.mp3", "text": "I pluck"}
+  ],
+  "sounds": [
+    {"filename": "sound01.mp3"},
+    {"filename": "sound01.mp3"},
+    {"filename": "sound01.mp3"}
+  ]
+}
