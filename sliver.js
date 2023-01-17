@@ -43,6 +43,27 @@ function setup() {
   let canvas =createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
 
+  let infoButton = createButton('i');
+  infoButton.class("infobutton");
+
+
+  let info = createDiv();
+  let infoText = createP("click on gray hairs to hear thoughts.");
+  let respawnButton = createButton("respawn");
+  //respawnButton.touchStarted( location.reload() );
+  infoText.class("instructions");
+  info.child(infoText);
+  info.child(respawnButton);
+  info.class("answers");
+  info.hide();
+
+  infoButton.mousePressed( () => {
+    console.log("pressed");
+    info.show();
+    infoText.show();
+  } );
+
+
   //audioSliver = createAudio('assets/audio/sliver01.mp3');
   //audioSliver.play();
 
@@ -172,6 +193,13 @@ function drawSlivers() {
 
 }
 
+function giveInfo(){
+  //let info =
+  //info.style('visibility', 'visible');
+  info.show();
+
+}
+
 function sliver(x, y){
 
   //how to avoid having them all on top of eachother?
@@ -196,7 +224,8 @@ function sliver(x, y){
   //and then exponentially slowly more begin to appear:
 
   this.life = random(0, graypoint-50);
-  //this.life = random(0, graypoint);
+  //this.life = random(0, 20); //takes a veeery long time until grays start to appear
+  //this.life = random(0, graypoint); //grays appear immediately
 
 
 
@@ -216,7 +245,10 @@ function sliver(x, y){
     let me = createVector(this.x, this.y);
     let mouse = createVector(x, y);
     let dist = me.dist(mouse);
-    if( dist <= this.d/3 && this.life >= graypoint ) {
+    //if( dist <= this.d/3 && this.life >= graypoint ) { //kind of hard to hit the tiny dots
+
+    if( dist <= this.r && this.life >= graypoint ) {
+
 
       if( sound ){
         if(this.audio){
@@ -246,7 +278,22 @@ function sliver(x, y){
       //p.style('font-size', '30px');
       //p.style('color', 'white');
       //p.style('background-color', 'black');
-      p.position(this.x, this.y);
+
+      if( clicks == 2 ){
+        p.position(windowWidth/10, windowHeight/10);
+      } else {
+        if( x > 7/8*windowWidth || y > 8/10*windowHeight ) {
+          if( x > 7/8*windowWidth && !(y > 8/10*windowHeight) ){
+            p.position(this.x - 1/8*windowWidth, this.y);
+          } else if ( !(x > 7/8*windowWidth) && y > 8/10*windowHeight ) {
+            p.position(this.x, this.y - 3/10*windowHeight);
+          }else if ( x > 7/8*windowWidth && y > 8/10*windowHeight ) {
+            p.position(this.x - 1/8*windowWidth, this.y - 3/10*windowHeight);
+          }
+        } else {
+          p.position(this.x, this.y);
+        }
+      }
        $( "p" ).fadeOut( 2500 );
        //$( "p" ).fadeOut( 1600 );
 
@@ -256,7 +303,7 @@ function sliver(x, y){
 
       //this.audio.pause();
       //play a musing about going gray / dyeing
-      this.fill=0;
+      this.fill = 0;
       this.life = random(0,20);
     }
   }
