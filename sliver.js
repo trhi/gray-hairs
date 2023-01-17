@@ -44,6 +44,7 @@ function setup() {
   canvas.style('display', 'block');
 
 
+/*
   //attempt to create info-button:
   let infoButton = createButton('i');
   infoButton.class("infobutton");
@@ -63,6 +64,7 @@ function setup() {
     info.show();
     infoText.show();
   } );
+  */
 
 
   //audioSliver = createAudio('assets/audio/sliver01.mp3');
