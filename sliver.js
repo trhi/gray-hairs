@@ -43,9 +43,10 @@ function setup() {
   let canvas =createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
 
+
+  //attempt to create info-button:
   let infoButton = createButton('i');
   infoButton.class("infobutton");
-
 
   let info = createDiv();
   let infoText = createP("click on gray hairs to hear thoughts.");
@@ -73,6 +74,13 @@ function setup() {
   noFill();
   rect(0, 0, windowWidth, windowHeight);
   */
+
+  if ( window.innerWidth < 992) {
+    //console.log('window is very tiny');
+    //console.log(window.innerWidth);
+    sliverSize = window.innerWidth/20;
+  }
+  console.log(window.innerWidth);
 
   //background(0, 0, 0);
   sliversX = windowWidth/(sliverSize*2);
