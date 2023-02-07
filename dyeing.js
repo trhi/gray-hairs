@@ -1,4 +1,5 @@
 let x, y, countX, countY, sliversX, sliversY, sliverSize = 10, graypoint = 250; //150
+let xover = 6/8, yover = 8/10;
 let url, observations;
 let anotherSliver, slivers = [];
 let soundofsliver, soundsofslivers = [], soundCounter = 0, maxAudios = 20, clicks = 0, sound = false;
@@ -42,6 +43,8 @@ function setup() {
 
   let canvas =createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
+  xover *= windowWidth;
+  yover *= windowHeight;
 
 
 /*
@@ -153,6 +156,12 @@ function setup() {
 }
 
 function draw() {
+
+  if( frameCount == 4 ){
+    let p = createP("<em>wait for the first gray hair, then tap it</em>");
+    p.position(windowWidth/10, windowHeight/10);
+    $( "p" ).fadeOut( 6000 );
+  }
 
   //background(0, 0, 0);
   clear();
@@ -291,19 +300,44 @@ function sliver(x, y){
 
       if( clicks == 2 ){
         p.position(windowWidth/10, windowHeight/10);
+        $( "p" ).fadeOut( 5000 );
       } else {
-        if( x > 7/8*windowWidth || y > 8/10*windowHeight ) {
-          if( x > 7/8*windowWidth && !(y > 8/10*windowHeight) ){
-            p.position(this.x - 1/8*windowWidth, this.y);
-          } else if ( !(x > 7/8*windowWidth) && y > 8/10*windowHeight ) {
+        if( x > xover || y > yover ) {
+          if( x > xover && !(y > yover) ){
+            p.position(this.x - 2/8*windowWidth, this.y);
+          } else if ( !(x > xover) && y > yover ) {
             p.position(this.x, this.y - 3/10*windowHeight);
-          }else if ( x > 7/8*windowWidth && y > 8/10*windowHeight ) {
+          }else if ( x > xover && y > yover ) {
+            p.position(this.x - 2/8*windowWidth, this.y - 3/10*windowHeight);
+          }
+        } else {
+          p.position(this.x, this.y);
+        }
+        $( "p" ).fadeOut( 2500 );
+        //$( "p" ).fadeOut( 2500 );
+        //$( "p" ).fadeOut( 1600 );
+      }
+
+/* //before using "constants" to check for x and y over
+      if( clicks == 2 ){
+        p.position(windowWidth/10, windowHeight/10);
+      } else {
+        if( x > xover*windowWidth || y > yover*windowHeight ) {
+          if( x > xover*windowWidth && !(y > yover*windowHeight) ){
+            p.position(this.x - 1/8*windowWidth, this.y);
+          } else if ( !(x > xover*windowWidth) && y > yover*windowHeight ) {
+            p.position(this.x, this.y - 3/10*windowHeight);
+          }else if ( x > xover*windowWidth && y > yover*windowHeight ) {
             p.position(this.x - 1/8*windowWidth, this.y - 3/10*windowHeight);
           }
         } else {
           p.position(this.x, this.y);
         }
       }
+      */
+
+
+
        $( "p" ).fadeOut( 2500 );
        //$( "p" ).fadeOut( 1600 );
 
