@@ -101,12 +101,26 @@ function drawSlivers() {
   for( let i=0; i < slivers.length; i++ ){ slivers[i].display(); }
 }
 
-function touchStarted(event) {
+
+function mousePressed() {
+  console.log("mouse pressed");
   //upon touchStarted, check which hair was clicked by going through the array of hairs:
   if ( clicks <= observations.slivers.length-1 ){ //but only if there is still text left to show
     slivers.forEach( element => element.clicked(mouseX, mouseY) );
   } //else do nothing
 }
+
+
+/* //seems to not work on Firefox and Safari:
+function touchStarted(event) {
+  console.log("touch started");
+  //upon touchStarted, check which hair was clicked by going through the array of hairs:
+  if ( clicks <= observations.slivers.length-1 ){ //but only if there is still text left to show
+    slivers.forEach( element => element.clicked(mouseX, mouseY) );
+  } //else do nothing
+  return false;
+}
+*/
 
 function giveInfo(){ //TODO: infobutton, or maybe not necessary?
   info.show();
