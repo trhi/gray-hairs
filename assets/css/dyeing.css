@@ -12,6 +12,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: openSans;
+  src: url("../fonts/OpenSans-VariableFont_wdth,wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body{
   overflow: hidden;
 }
@@ -46,7 +53,7 @@ p{
   background-color: black;
   color: white;
   font-size: 30px;
-  font: "Poppins";
+  font-family: openSans;
 }
 
 .infobutton{
