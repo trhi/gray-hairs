@@ -1,6 +1,8 @@
 let sliverSize = 10, graypoint = 250; //150
 let xover = 6/8, yover = 8/10;
-let observations, slivers = [], clicks = 0;
+let observations, slivers = [], clicks = -1, iterator = 0, clicking = true, text = true, sound = false; //clicks=-1 to make it easier to work with the array indexes..
+let chosenBranch;
+let branchIterator = 0;
 
 //change name to:
 // gray hairs
@@ -81,10 +83,20 @@ function setup() {
 }
 
 function draw() {
+
+  //for showing the user how far along they are in the reading of the work:
+  /*
+  if(clicks > -1){
+    let p = createP(clicks + " / " + observations.slivers.length );
+    p.position(20, 20);
+    p.style("border-radius","25px");
+  }
+  */
+
   if( frameCount == 4 ){ //show instruction after person opens work
-    let p = createP("<em>wait for the first gray hair, then tap it</em>");
+    let p = createP("<em> wait for the first gray hair, then tap it </em>");
     p.position(windowWidth/10, windowHeight/10);
-    $( "p" ).fadeOut( 6000 );
+    $( "p" ).fadeOut( 10000 );
   }
   clear();
   drawSlivers();
@@ -93,7 +105,11 @@ function draw() {
   if ( pixelColor == 255 || pixelColor == 0 ){
     cursor(ARROW); //show normal arrow for black hairs
   } else {
-    cursor(CROSS); //show crosshair for graying hairs
+    //if(clicking){
+      cursor(CROSS); //show crosshair for graying hairs
+    //} else {
+    //  cursor(WAIT); //show wait cursor while audio is playing.. not nice at all..
+    //}
   }
 }
 
@@ -103,9 +119,9 @@ function drawSlivers() {
 
 
 function mousePressed() {
-  console.log("mouse pressed");
+  //console.log("mouse pressed");
   //upon touchStarted, check which hair was clicked by going through the array of hairs:
-  if ( clicks <= observations.slivers.length-1 ){ //but only if there is still text left to show
+  if ( clicking && clicks <= observations.slivers.length-1 ){ //but only if there is still text left to show
     slivers.forEach( element => element.clicked(mouseX, mouseY) );
   } //else do nothing
 }
@@ -125,6 +141,52 @@ function touchStarted(event) {
 function giveInfo(){ //TODO: infobutton, or maybe not necessary?
   info.show();
 }
+
+//Credits of this method go to TNT, courtesy of Tero Marttila (August of 2016)
+//The code in play() is copied from Give me a Reason, which was written by
+//Tero Marttila in August of 2016 when we refactored my otherwise functional code:
+//of course it has been adapted here to the necessities of this work:
+function play(chosen){
+
+
+  var audioDiv = $('#audio');
+  //audioDiv.empty(); //this stops all audio that is currently playing and starts playing the new audio
+  //by NOT emptying the audioDiv, the user can layer the audio!! VERY NICE!
+  //risk: page may crash because of too many simultaneous audio elements?
+  var loading = 0;
+  var playing = 0;
+
+  loading++;
+  if(loading == 1){
+    //clicking = false; //enable this to force the user to finish listening before clicking again
+    //the problem with this approach is that it feels like the interface doesn't work..
+    clicking = true; //let the user click as quickly as they want - this way audio will cut off if it hasn't finished playing
+    //letting the user click whenever they want to makes for a better user experience
+    //it is likely that they will self regulate and pace their clicking in order to listen
+  }
+
+  var audio = $( "<audio></audio>", {
+    src: observations.path+chosen.filename,
+    txt: chosen.text,
+    preload: 'auto',
+    on: {
+      canplaythrough: function(event){
+        loading--;
+        if(loading === 0){
+          this.play();
+        }
+      },//close canplaythrough:
+      ended: function(event){
+        playing++;
+        clicking = true;
+        //TODO: remove this/itself from the audioDiv
+
+      }//close ended:
+    }//close on:
+  });//close var audio
+  audioDiv.append(audio);
+
+}//close play()
 
 function sliver(x, y){
 
@@ -149,11 +211,19 @@ function sliver(x, y){
   this.display = function() {
     this.life++;
     if(this.life >= graypoint){
-      if(Math.round(this.life) === graypoint && clicks == 0){
+      if( Math.round(this.life) === graypoint && clicks == -1){
         clicks++;
         this.fill = (226,226,226); //snap the firts gray hair to light gray immediately to catch attention
-      } else{
-        this.fill+=1; //let the rest fade slowly
+      } else if ( clicks == 0 && iterator == 1 ) {
+    //} else if ( clicks == 1 && iterator == 1 ) { //when the text starts with an array instead of the title: Gray hairs (2023)
+        this.fill = (37,37,37);
+      } else {
+         if(clicks < ( (2/3)*(observations.slivers.length) ) ){ //if the user has clicked through less than 2/3rds of the narrative
+          //this.fill+=0.5; //fade the hairs more slowly
+          this.fill+=0.3; //fade the hairs even more slowly
+        } else {
+          this.fill+=1; //for the last third, make the hairs fade faster
+        }
       }
     }
     noStroke();
@@ -166,34 +236,97 @@ function sliver(x, y){
     let me = createVector(this.x, this.y);
     let mouse = createVector(x, y);
     let dist = me.dist(mouse);
+    let chosen;
 
     if( dist <= this.r && this.life >= graypoint ) { //if taps within the radius of the circle
-      let chosen = observations.slivers[clicks];
-      clicks++;
-      let p = createP(">> " + chosen.text);
 
-      //the code below positions text and sets how long it takes to fade out:
-      if( clicks == 2 ){
-        p.position(windowWidth/10, windowHeight/10);
-        $( "p" ).fadeOut( 5000 );
-      } else {
-        if( x > xover || y > yover ) { //don't let text go over side of screen
-          if( x > xover && !(y > yover) ){
-            p.position(this.x - 2/8*windowWidth, this.y);
-          } else if ( !(x > xover) && y > yover ) {
-            p.position(this.x, this.y - 3/10*windowHeight);
-          }else if ( x > xover && y > yover ) {
-            p.position(this.x - 2/8*windowWidth, this.y - 3/10*windowHeight);
+      //TODO: make clicks start at -1! It is easier for the array index...
+      if( Array.isArray( observations.slivers[clicks] ) ){
+        if( Array.isArray( observations.slivers[clicks][iterator] ) ){
+          //if it is an array of arrays of fragments:
+          //if there is an array at the index=iterator, then assume that there are various arrays
+          //and choose a random array from within this array:
+          console.log("there is an array of arrays at this index! Chosen branch is: ", chosenBranch);
+          //choose random array:
+
+
+          if( branchIterator == 0 ){
+            chosenBranch = random( observations.slivers[clicks] );
+            console.log("Chosen branch is: ", chosenBranch);
+
           }
-        } else { //if it's not going over screen, position it where the person clicked
-          p.position(this.x, this.y);
-        }
-        if ( clicks == observations.slivers.length ){
-          $( "p" ).fadeOut( 12345 ); //fade the last word out very slowly
+          if( branchIterator < chosenBranch.length ) {
+            chosen = chosenBranch[branchIterator];
+            branchIterator++;
+            if( branchIterator == chosenBranch.length ){ //once you've come to the last thought of that collection of fragments
+              branchIterator = 0; //set the array iterator back to zero
+              clicks++; //and then move on along the main array of fragments
+              //chosenBranch = undefined;
+            }
+          }
+
+
+
         } else {
-          $( "p" ).fadeOut( 2500 ); //fade other text out after normal interval
+          //if it just an array of fragments, iterate through them:
+          //console.log("its an array! And clicks = ", clicks);
+          //console.log("its an array! Length is = ", observations.slivers[clicks].length);
+
+          if( iterator < observations.slivers[clicks].length ) {
+            chosen = observations.slivers[clicks][iterator];
+            iterator++;
+            if( iterator == observations.slivers[clicks].length ){ //once you've come to the last thought of that collection of fragments
+              iterator = 0; //set the array iterator back to zero
+              clicks++; //and then move on along the main array of fragments
+            }
+          }
+
         }
+      } else {
+        //console.log("its not an array! And clicks = ", clicks);
+        chosen = observations.slivers[clicks];
+        clicks++;
       }
+      //let p = createP(">> " + chosen.text); //originally: include ">>" before text
+      //at this point the text has been chosen:
+
+      //test what the experience is like without displaying the text at all, only audio:
+      if ( text ){
+
+        let p = createP(" " + chosen.text + " ");
+        p.style("border-radius","25px");
+        //border-radius: 25px;
+
+        //the code below positions text and sets how long it takes to fade out:
+        if( clicks == 0 && iterator == 1 ){ // == 2, this hardcodes for the first line of text to appear in top left
+          p.position(windowWidth/10, windowHeight/10);
+          $( "p" ).fadeOut( 5000 );
+        } else {
+          if( x > xover || y > yover ) { //don't let text go over side of screen
+            if( x > xover && !(y > yover) ){
+              p.position(this.x - 2/8*windowWidth, this.y);
+            } else if ( !(x > xover) && y > yover ) {
+              p.position(this.x, this.y - 3/10*windowHeight);
+            }else if ( x > xover && y > yover ) {
+              p.position(this.x - 2/8*windowWidth, this.y - 3/10*windowHeight);
+            }
+          } else { //if it's not going over screen, position it where the person clicked
+            p.position(this.x, this.y);
+          }
+          if ( clicks == observations.slivers.length ){
+            $( "p" ).fadeOut( 12345 ); //fade the last word out very slowly
+          } else {
+            $( "p" ).fadeOut( 2500 ); //fade other text out after normal interval
+          }
+        }
+
+
+      }//end if ( text )
+
+      if ( sound ){
+        play(chosen);
+      }//end if ( sound )
+
       //finally, reset hair follicle to black and give it a new life:
       this.fill = 0;
       this.life = random(0,20);
