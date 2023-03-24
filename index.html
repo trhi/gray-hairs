@@ -16,6 +16,24 @@
 </head>
 <body style="margin: 0px;">
   <div id="audio"></div>
+
+  <!-- MENU -->
+  <div class="menu">
+      <span id="menusymbol">◯◯◯</span>  <!-- alternatives: ◯◯◯ ☰ -->
+      <br>
+    <span id="#sound" onclick="toggleTrueFalse('sound', sound);"><a href="#">sound</a></span> <!-- alternatives: ▷ -->
+    <span id="#text" onclick="toggleTrueFalse('text', text);"><a href="#">text</a></span> <!-- alternatives: ▷  <a  href="#"></a>-->
+    <span id="#autoplay" onclick="toggleTrueFalse('autoplay', autoplay);"><a href="#">autoplay</a></span> <!-- alternatives: ▷ -->
+    <span id="#paintbucket" onclick="paintBucket()"><a href="#">paintbucket</a></span> <!-- alternatives: ▷ -->
+    <span id="#refresh" onclick="windowResized()"><a href="#">⟳</a></span>
+    <span id="#refresh" onclick="windowResized()"><a href="#">info</a></span>
+
+
+    <!--   <br>
+      <span>↟</span>-->
+  </div>
+
+
   <!--
   <button id="infobutton" class="infobutton" onclick="giveInfo()">i</button>
   <div id="answers" style="visibility:hidden">

@@ -19,11 +19,141 @@
   font-style: normal;
 }
 
+/* MENU */
+.menu
+{
+  position:fixed;
+  left:0px;
+  bottom:-25px;
+  font-family: openSans;
+  font-size: 20px;
+
+  /* originally:
+  top:-50px;
+  MENU */
+
+  width:100vw;
+  padding:0px; /* amount of padding around the edges of the menu */
+  text-align:center;
+
+  /*background-color:rgba(0,0,0,0.9);*/
+
+  background-color:rgba(0,0,0,1);
+
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.6);
+
+  font-size:20px;
+  color:white;
+
+  /* transition */
+
+  transition:bottom 1s;
+  -webkit-transition:bottom 1s;
+
+  /* original transition
+  transition:top 1s;
+  -webkit-transition:top 1s;
+  transition */
+
+}
+
+#menusymbol{
+  font-size:20px;
+  color: #404040
+}
+
+.menu:hover
+{
+  /* originally: top:0px; */
+  bottom:0px;
+}
+
+/* SPAN OF SPAN */
+
+.menu span
+{
+  margin:20px;
+}
+
+.menu span a:hover
+{
+  color:rgba(255,255,255,0.5);
+}
+
+/* Body and Title*/
+
+a
+{
+  text-decoration:none;
+  color:white;
+}
+
+
+
+
+/* my own css */
 body{
   overflow: hidden;
 }
 
 @media screen and (max-width: 992px) {
+
+  .menu
+  {
+    position:fixed;
+    left:0px;
+    bottom:-70px;
+    font-family: openSans;
+
+    /* originally:
+    top:-50px;
+    MENU */
+
+    width:100vw;
+    padding:0px; /* amount of menubar showing */
+    text-align:center;
+
+    /*background-color:rgba(0,0,0,0.9);*/
+
+    background-color:rgba(0,0,0,1);
+
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.6);
+
+    font-size:20px;
+    color:white;
+
+    /* transition */
+
+    transition:bottom 1s;
+    -webkit-transition:bottom 1s;
+
+    /* original transition
+    transition:top 1s;
+    -webkit-transition:top 1s;
+    transition */
+
+  }
+
+  .menu span
+  {
+    margin:10px;
+    font-size:26px;
+  }
+
+  #menusymbol{
+    font-size:30px;
+    color: #404040
+  }
+
+  .menu:hover
+  {
+    /* originally: top:0px; */
+    bottom:0px;
+  }
+
+
+
+
   p{
     font-size: 50px;
   }
@@ -46,7 +176,7 @@ body{
   }
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
-}
+} /* end @ media screen and max-width */
 
 
 p{
