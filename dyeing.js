@@ -119,22 +119,38 @@ function readMe() {
 
 function toggleTrueFalse(variable, value) {
 
+  // if the value is currently false, set it to true:
+  //essentially we can just always run:
+  // eval(variable + " = " + !value + ";");
+  //because that line of code just changes the value to the opposite of what it was before..
+
   //console.log("I just received:", variable, "and it is:", value);
-  if( value ){
+  if( value ){ // if the value is currently true, set it to false:
     eval(variable + " = " + !value + ";");
     if( variable === 'text'){
-      console.log("changing text");
-      $('text').html("CHANGED");
+      document.getElementById("#text").src="assets/img/text-false.jpg";
+    }
+    if( variable === 'sound'){
+      document.getElementById("#sound").src="assets/img/sound-false.jpg";
+    }
+    if( variable === 'autoplay'){
+      document.getElementById("#autoplay").src="assets/img/autoplay-false.jpg";
     }
     if( variable === 'paintbucket'){
-      console.log("changing text");
-      $('text').html("<s>paintbucket</s>");
+      //console.log("changing text");
+      //$('text').html("<s>paintbucket</s>");
     }
     //console.log("I received:", variable, "and set it to:", !value);
-  } else {
+  } else { // if the value is currently false, set it to true:
     eval(variable + " = " + !value + ";");
-    if( variable === 'text' ){
-      $('text').html("Abc");
+    if( variable === 'text'){
+      document.getElementById("#text").src="assets/img/text-true.jpg";
+    }
+    if( variable === 'sound'){
+      document.getElementById("#sound").src="assets/img/sound-true.jpg";
+    }
+    if( variable === 'autoplay'){
+      document.getElementById("#autoplay").src="assets/img/autoplay-true.jpg";
     }
     //console.log("I received:", variable, "and set it to:", !value);
   }

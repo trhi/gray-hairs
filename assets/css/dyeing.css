@@ -24,7 +24,7 @@
 {
   position:fixed;
   left:0px;
-  bottom:-25px;
+  bottom:-38px;
   font-family: openSans;
   font-size: 20px;
 
@@ -102,7 +102,7 @@ body{
   {
     position:fixed;
     left:0px;
-    bottom:-70px;
+    bottom:-40px;
     font-family: openSans;
 
     /* originally:
