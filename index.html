@@ -16,17 +16,28 @@
 </head>
 <body style="margin: 0px;">
   <div id="audio"></div>
+  <div style="display:none;" class="instructions" id="instructions">
+    <button onClick="$('#instructions').hide();" style='float:right; z-index: 1000; margin-top: 10px; margin-right: -15px;' id='x-button' class='lang-button'>x</button>
+    <p class="instructionsP" style="text-align: center;">...tap on gray hairs</p>
+    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/sound-true.jpg"></img></span><span style="margin-left:10px; position:relative; top: -10px;">click to turn sound on / off</span></p>
+    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/text-true.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">click to turn text on / off</span></p>
+    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/linear-true.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">linear text (tap to switch)</span></p>
+    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/linear-false.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">non-linear text (tap to switch)</span></p>
+    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/paintbucket.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">click to dye hair</span></p>
+    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/reload.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">click to reload page</span></p>
+    </div>
 
   <!-- MENU -->
   <div class="menu">
       <span id="menusymbol">◯◯◯</span>  <!-- alternatives: ◯◯◯ ☰ -->
       <br>
-    <span><img id="#sound" onclick="toggleTrueFalse('sound', sound);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/sound-true.jpg"></img></span> <!-- alternatives: ▷  filter: brightness(50%); <a href="#">sound</a> -->
-    <span><img id="#text" onclick="toggleTrueFalse('text', text);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/text-true.jpg"></img></span> <!-- alternatives: ▷ <a href="#">text</a>-->
-    <span><img id="#autoplay" onclick="toggleTrueFalse('autoplay', autoplay);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/autoplay-false.jpg"></img></span> <!-- alternatives: ▷ <a href="#">autoplay</a> -->
-    <span><img id="#paintbucket" onclick="paintBucket()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/paintbucket.jpg"></img></span> <!-- alternatives: ▷ <a href="#">paintbucket</a> -->
-    <span><img id="#refresh" onclick="windowResized()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/reload.jpg"></img></span> <!-- alternatives: ▷ <a href="reload">⟳</a> -->
-    <span><img id="#info" onclick="giveInfo()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/info.jpg"></img></span><!-- alternatives: ▷ <a href="i">info</a> -->
+    <span><img id="sound" onclick="toggleTrueFalse('sound', sound);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/sound-true.jpg"></img></span> <!-- alternatives: ▷  filter: brightness(50%); <a href="#">sound</a> -->
+    <span><img id="text" onclick="toggleTrueFalse('text', text);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/text-true.jpg"></img></span> <!-- alternatives: ▷ <a href="#">text</a>-->
+    <span><img id="linear" onclick="toggleTrueFalse('linear', linear);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/linear-true.jpg"></img></span> <!-- alternatives: ▷ <a href="reload">⟳</a> -->
+    <span><img id="autoplay" onclick="toggleTrueFalse('autoplay', autoplay);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/autoplay-false.jpg"></img></span> <!-- alternatives: ▷ <a href="#">autoplay</a> -->
+    <span><img id="paintbucket" onclick="paintBucket()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/paintbucket.jpg"></img></span> <!-- alternatives: ▷ <a href="#">paintbucket</a> -->
+    <span><img id="info" onclick="giveInfo()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/info.jpg"></img></span><!-- alternatives: ▷ <a href="i">info</a> -->
+    <span><img id="refresh" onclick="windowResized()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/reload.jpg"></img></span> <!-- alternatives: ▷ <a href="reload">⟳</a> -->
 
 
     <!--   <br>

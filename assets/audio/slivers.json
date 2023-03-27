@@ -1,6 +1,7 @@
 {
 	"path": "assets/audio/",
 	"title" : "Gray hairs (2023)",
+	"instructions" : "tap on gray hairs to read",
 	"slivers": [
 		[
 		{"filename": "fragment001.mp3", "text": "I still remember the moment I found my first gray hair"},
