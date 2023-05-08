@@ -1,25 +1,22 @@
 @font-face {
-  font-family: "Poppins";
-  src: url("../fonts/PoppinsLatin-Medium.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Poppins-light-300";
-  src: url("../fonts/poppins-v19-latin-300.woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: openSans;
   src: url("../fonts/OpenSans-VariableFont_wdth,wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
-/* MENU */
+.icontext{
+  margin-left:10px;
+  position:relative;
+  top: -10px;
+}
+
+.icons{
+  cursor: pointer;
+  width:30px;
+  border-radius: 50%;
+}
+
 .menu
 {
   position:fixed;
@@ -27,34 +24,15 @@
   bottom:-38px;
   font-family: openSans;
   font-size: 20px;
-
-  /* originally:
-  top:-50px;
-  MENU */
-
   width:100vw;
   padding:0px; /* amount of padding around the edges of the menu */
   text-align:center;
-
-  /*background-color:rgba(0,0,0,0.9);*/
-
   background-color:rgba(0,0,0,1);
-
   box-shadow: 0px 2px 5px rgba(0,0,0,0.6);
-
   font-size:20px;
   color:white;
-
-  /* transition */
-
   transition:bottom 1s;
   -webkit-transition:bottom 1s;
-
-  /* original transition
-  transition:top 1s;
-  -webkit-transition:top 1s;
-  transition */
-
 }
 
 #menusymbol{
@@ -64,11 +42,8 @@
 
 .menu:hover
 {
-  /* originally: top:0px; */
   bottom:0px;
 }
-
-/* SPAN OF SPAN */
 
 .menu span
 {
@@ -80,58 +55,32 @@
   color:rgba(255,255,255,0.5);
 }
 
-/* Body and Title*/
-
 a
 {
   text-decoration:none;
   color:white;
 }
 
-
-
-
-/* my own css */
 body{
   overflow: hidden;
 }
 
 @media screen and (max-width: 992px) {
-
   .menu
   {
     position:fixed;
     left:0px;
     bottom:-40px;
     font-family: openSans;
-
-    /* originally:
-    top:-50px;
-    MENU */
-
     width:100vw;
     padding:0px; /* amount of menubar showing */
     text-align:center;
-
-    /*background-color:rgba(0,0,0,0.9);*/
-
     background-color:rgba(0,0,0,1);
-
     box-shadow: 0px 2px 5px rgba(0,0,0,0.6);
-
     font-size:20px;
     color:white;
-
-    /* transition */
-
     transition:bottom 1s;
     -webkit-transition:bottom 1s;
-
-    /* original transition
-    transition:top 1s;
-    -webkit-transition:top 1s;
-    transition */
-
   }
 
   .menu span
@@ -147,7 +96,6 @@ body{
 
   .menu:hover
   {
-    /* originally: top:0px; */
     bottom:0px;
   }
 
@@ -161,7 +109,6 @@ body{
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 } /* end @ media screen and max-width */
-
 
 .instructionsP{
   font-size: 14px;
@@ -190,12 +137,6 @@ p{
   color: white;
   font-size: 30px;
   font-family: openSans;
-}
-
-#container{
-  position: relative;
-  width: window.innerWidth;
-  height: window.innerHeight;
 }
 
 .lang-button{

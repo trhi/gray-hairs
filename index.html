@@ -1,17 +1,16 @@
 <!doctype html>
 <html>
 <head>
-<title>dyeing</title>
+<title>gray hairs</title>
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script type="text/javascript" src="library/jquery-3.5.1.min.js"></script>
 <script language="javascript" type="text/javascript" src="library/p5.min.js"></script>
-<script language="javascript" type="text/javascript" src="library/p5.sound.min.js"></script>
 
-<script language="javascript" type="text/javascript" src="dyeing.js"></script>
-<link rel="stylesheet" href="assets/css/dyeing.css">
+<script language="javascript" type="text/javascript" src="gray-hairs.js"></script>
+<link rel="stylesheet" href="assets/css/gray-hairs.css">
 
 </head>
 <body style="margin: 0px;">
@@ -19,38 +18,24 @@
   <div style="display:none;" class="instructions" id="instructions">
     <button onClick="$('#instructions').hide();" style='cursor: pointer; float:right; z-index: 1000; margin-top: 10px; margin-right: -15px;' id='x-button' class='lang-button'>x</button>
     <p class="instructionsP" style="text-align: center;">...tap on gray hairs</p>
-    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/sound-true.jpg"></img></span><span style="margin-left:10px; position:relative; top: -10px;">click to turn sound on / off</span></p>
-    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/text-true.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">click to turn text on / off</span></p>
-    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/linear-true.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">linear text (tap to switch)</span></p>
-    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/linear-false.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">non-linear text (tap to switch)</span></p>
-    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/paintbucket.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">click to dye hair</span></p>
-    <p class="instructionsP"><span><img style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/reload.jpg"></img></span><span style="margin-left: 10px; position:relative; top: -10px;">click to reload page</span></p>
-    </div>
+    <p class="instructionsP"><span><img class="icons" src="assets/img/sound-true.jpg"></img></span><span class="icontext">click to turn sound on / off</span></p>
+    <p class="instructionsP"><span><img class="icons" src="assets/img/text-true.jpg"></img></span><span class="icontext">click to turn text on / off</span></p>
+    <p class="instructionsP"><span><img class="icons" src="assets/img/linear-true.jpg"></img></span><span class="icontext">linear text (tap to switch)</span></p>
+    <p class="instructionsP"><span><img class="icons" src="assets/img/linear-false.jpg"></img></span><span class="icontext">non-linear text (tap to switch)</span></p>
+    <p class="instructionsP"><span><img class="icons" src="assets/img/paintbucket.jpg"></img></span><span class="icontext">click to dye hair</span></p>
+    <p class="instructionsP"><span><img class="icons" src="assets/img/reload.jpg"></img></span><span class="icontext">click to reload page</span></p>
+  </div>
 
-  <!-- MENU -->
   <div class="menu">
-      <span id="menusymbol">◯◯◯</span>  <!-- alternatives: ◯◯◯ ☰ -->
+      <span id="menusymbol">◯◯◯</span>
       <br>
-    <span><img id="sound" onclick="toggleTrueFalse('sound', sound);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/sound-true.jpg"></img></span> <!-- alternatives: ▷  filter: brightness(50%); <a href="#">sound</a> -->
-    <span><img id="text" onclick="toggleTrueFalse('text', text);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/text-true.jpg"></img></span> <!-- alternatives: ▷ <a href="#">text</a>-->
-    <span><img id="linear" onclick="toggleTrueFalse('linear', linear);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/linear-true.jpg"></img></span> <!-- alternatives: ▷ <a href="reload">⟳</a> -->
-    <span><img id="autoplay" onclick="toggleTrueFalse('autoplay', autoplay);" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/autoplay-false.jpg"></img></span> <!-- alternatives: ▷ <a href="#">autoplay</a> -->
-    <span><img id="paintbucket" onclick="paintBucket()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/paintbucket.jpg"></img></span> <!-- alternatives: ▷ <a href="#">paintbucket</a> -->
-    <span><img id="info" onclick="giveInfo()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/info.jpg"></img></span><!-- alternatives: ▷ <a href="i">info</a> -->
-    <span><img id="refresh" onclick="windowResized()" style="cursor: pointer; width:30px; border-radius: 50%;" src="assets/img/reload.jpg"></img></span> <!-- alternatives: ▷ <a href="reload">⟳</a> -->
-
-
-    <!--   <br>
-      <span>↟</span>-->
+    <span><img id="sound" onclick="toggleTrueFalse('sound', sound);" class="icons" src="assets/img/sound-true.jpg"></img></span>
+    <span><img id="text" onclick="toggleTrueFalse('text', text);" class="icons" src="assets/img/text-true.jpg"></img></span>
+    <span><img id="linear" onclick="toggleTrueFalse('linear', linear);" class="icons" src="assets/img/linear-true.jpg"></img></span>
+    <span><img id="autoplay" onclick="toggleTrueFalse('autoplay', autoplay);" class="icons" src="assets/img/autoplay-false.jpg"></img></span>
+    <span><img id="paintbucket" onclick="paintBucket()" class="icons" src="assets/img/paintbucket.jpg"></img></span>
+    <span><img id="info" onclick="giveInfo()" class="icons" src="assets/img/info.jpg"></img></span>
+    <span><img id="refresh" onclick="windowResized()" class="icons" src="assets/img/reload.jpg"></img></span>
   </div>
-
-
-  <!--
-  <button id="infobutton" class="infobutton" onclick="giveInfo()">i</button>
-  <div id="answers" style="visibility:hidden">
-    <p>vibrant gray</p>
-    <button class="infobutton" onclick="location.reload()">respawn</button>
-  </div>
--->
 </body>
 </html>
