@@ -5,6 +5,10 @@
   font-style: normal;
 }
 
+.caption{
+  font-size: 14px;
+}
+
 .icontext{
   margin-left:10px;
   position:relative;

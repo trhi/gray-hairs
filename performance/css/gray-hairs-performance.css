@@ -1,0 +1,30 @@
+@font-face {
+  font-family: openSans;
+  src: url("OpenSans-VariableFont_wdth,wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.caption{
+  font-size: 14px;
+}
+
+h1{font-family: openSans;}
+h2{
+  font-family: openSans;
+  margin-top: 40px;
+}
+
+p{
+  font-size: 20px;
+  font-family: openSans;
+}
+
+
+@media screen and (max-width: 992px) {
+  p{ font-size: 30px;}
+  h1{ font-size: 50px; }
+  h2{ font-size: 40px; }
+  img{ width: 100vw;}
+  #text{ width: 100vw;}
+} /* end @ media screen and max-width */

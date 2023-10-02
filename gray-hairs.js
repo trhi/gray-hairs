@@ -35,7 +35,7 @@
 
 let hairSize = 10, graypoint = 250; //150
 let xover = 6/8, yover = 8/10;
-let clicks = -1, observations, hairs = [], text = true, sound = true, autoplay = false, autoplayCounter = 0, playing=false, started = false, linear = true; //clicks=-1 to make it easier to work with the array indexes..;
+let clicks = -1, observations, hairs = [], text = true, sound = true, autoplay = false, autoplayCounter = 0, autoplaypause = 2000, playing=false, started = false, linear = true; //clicks=-1 to make it easier to work with the array indexes..;
 let fragmentCounter = 0, linearClicks = 0; //used for attributing audio elements to the hairs, used to keep track of where the user is in the reading of the linear poem
 
 function preload() {
@@ -127,7 +127,7 @@ function readMe() {
     if (autoplaying.life > graypoint){
       autoplaying.clicked();
       playing = true;
-      setTimeout( readMe , 2000 );
+      setTimeout( readMe , autoplaypause ); // originally: 2000, autoplaypause
     } else {
       readMe();
     }
